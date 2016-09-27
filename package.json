@@ -19,6 +19,7 @@
     "gulp": "^3.9.1",
     "nodemon": "^1.10.2",
     "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.8.3",
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
