@@ -16,4 +16,8 @@ app.get('/*',(req,res)=>{
 	res.sendFile(path.join(__dirname,'./index.html'));
 })
 
+// app.post('/emailVerify',function(req,res){
+// 	res.send('Got your email as:',req.body);
+// })
+
 app.listen(3000,()=> console.log("Running on localhost 3000"));
