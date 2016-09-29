@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import SubmitButton from 'material-ui/RaisedButton';
-
+import validateInput from '../../../server/shared/validations/signUpPageValidation';
 import {connect} from 'react-redux';
 import {sendVerificationEmail} from '../../actions/signUpActions'; 
 
@@ -41,6 +41,13 @@ class SignUpPage extends React.Component{
     }
    
  }
+ isValid(){
+  const {errors,isValid} = validateInput(this.state);
+  if(!isValid){
+    this.setState({errorText:errors.email})
+  }
+  return isValid;
+ }
   TextFieldHandler(e) {
         this.setState({
             email: e.target.value,
@@ -50,15 +57,16 @@ class SignUpPage extends React.Component{
     };
   SubmitButtonHandler(){
     var that = this;
-    this.setState({errorText:''});
-     this.props.sendVerificationEmail(this.state)
-     .then(function(response){
-      console.log(response);
-     })
-     .catch(function(error){
-      that.setState({errorText:error.response.data.email});
-     })
-      
+    if(this.isValid()){
+            this.setState({errorText:''});
+             this.props.sendVerificationEmail(this.state)
+             .then(function(response){
+              
+             })
+             .catch(function(error){
+              that.setState({errorText:error.response.data.email});
+             })
+           }
      }
 
 render(){
